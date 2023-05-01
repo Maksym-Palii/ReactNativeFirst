@@ -1,8 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
-import RegistrationScreen from "./Screens/Segment/RegistrationScreen";
+import RegistrationScreen from "./src/Screens/Segment/RegistrationScreen";
 import { useFonts } from "expo-font";
-import PhotoBG from "./Screens/img/PhotoBG.png";
+import PhotoBG from "./src/img/PhotoBG.png";
 
 export default function App() {
   // const [fontsLoaded] = useFonts({
