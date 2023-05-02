@@ -1,4 +1,5 @@
 import {
+  Image,
   StyleSheet,
   Text,
   TextInput,
@@ -9,6 +10,12 @@ import {
 const RegistrationScreen = () => {
   return (
     <View style={styles.container}>
+      <View style={styles.containerFotoUser}>
+        <Image
+          style={styles.addFotoUser}
+          source={require("../../img/add.png")}
+        />
+      </View>
       <Text style={styles.text}>Реєстрація</Text>
       <TextInput
         style={styles.input}
@@ -22,11 +29,14 @@ const RegistrationScreen = () => {
         placeholderTextColor="#dbdbdb"
         inputMode="email"
       />
+
+      {/* <Text style={styles.inputText}>Показати</Text> */}
+
       <TextInput
         style={styles.input}
         placeholder="Пароль"
         placeholderTextColor="#dbdbdb"
-        // inputMode="decimal"
+        secureTextEntry={true}
       />
 
       <TouchableOpacity style={styles.btnTO}>
@@ -49,10 +59,23 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
   },
+  containerFotoUser: {
+    width: 120,
+    height: 120,
+    borderRadius: 16,
+    backgroundColor: "#f6f6f6",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: -60,
+  },
+  addFotoUser: {
+    marginLeft: 107,
+    marginTop: 81,
+  },
   text: {
-    marginTop: 92,
+    marginTop: 32,
     marginBottom: 32,
-    fontFamily: "Roboto",
+    fontFamily: "Roboto-M-500",
     fontWeight: 500,
     fontSize: 30,
     lineHeight: 35,
@@ -72,6 +95,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#f6f6f6",
   },
+
+  inputText: {
+    marginTop: 1,
+  },
   btnTO: {
     marginTop: 43 - 16,
     paddingTop: 16,
@@ -81,7 +108,7 @@ const styles = StyleSheet.create({
     borderRadius: 32,
   },
   btnTitle: {
-    fontFamily: "Roboto",
+    fontFamily: "Roboto-R-400",
     fontWeight: 400,
     fontSize: 16,
     lineHeight: 19,
@@ -91,7 +118,7 @@ const styles = StyleSheet.create({
   },
   btnText: {
     marginTop: 16,
-    fontFamily: "Roboto",
+    fontFamily: "Roboto-R-400",
     fontWeight: 400,
     fontSize: 16,
     lineHeight: 19,
