@@ -18,14 +18,15 @@ const LoginScreen = () => {
         inputMode="email"
       />
 
-      {/* <Text style={styles.inputText}>Показати</Text> */}
-
-      <TextInput
-        style={styles.input}
-        placeholder="Пароль"
-        placeholderTextColor="#dbdbdb"
-        secureTextEntry={true}
-      />
+      <View>
+        <TextInput
+          style={styles.input}
+          placeholder="Пароль"
+          placeholderTextColor="#dbdbdb"
+          secureTextEntry={true}
+        />
+        <Text style={styles.inputText}>Показати</Text>
+      </View>
 
       <TouchableOpacity style={styles.btnTO}>
         <Text style={styles.btnTitle}>Увійти</Text>
@@ -69,6 +70,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#f6f6f6",
+  },
+  inputText: {
+    position: "absolute",
+    right: 16,
+    top: 16,
+
+    fontFamily: "Roboto-R-400",
+
+    fontWeight: 400,
+    fontSize: 16,
+    lineHeight: 19,
+    color: "#1B4371",
   },
 
   btnTO: {
