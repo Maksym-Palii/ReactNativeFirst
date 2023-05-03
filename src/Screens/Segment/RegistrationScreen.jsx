@@ -1,5 +1,13 @@
+import { useState } from "react";
+import {
+  Keyboard,
+  Platform,
+  PlatformColor,
+  TouchableWithoutFeedback,
+} from "react-native";
 import {
   Image,
+  KeyboardAvoidingView,
   StyleSheet,
   Text,
   TextInput,
@@ -8,43 +16,74 @@ import {
 } from "react-native";
 
 const RegistrationScreen = () => {
+  const [loginRegistration, setLoginRegistration] = useState("");
+  const [emailRegistration, setEmailRegistration] = useState("");
+  const [passwordRegistration, setPasswordRegistration] = useState("");
+
+  const onRegistration = () => {
+    console.log({
+      loginRegistration,
+      emailRegistration,
+      passwordRegistration,
+    });
+    resetForm();
+  };
+
+  const resetForm = () => {
+    setLoginRegistration("");
+    setEmailRegistration("");
+    setPasswordRegistration("");
+  };
+
   return (
-    <View style={styles.container}>
-      <View style={styles.containerFotoUser}>
-        <Image
-          style={styles.addFotoUser}
-          source={require("../../img/add.png")}
-        />
-      </View>
-      <Text style={styles.text}>Реєстрація</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Логін"
-        placeholderTextColor="#dbdbdb"
-        inputMode="text"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Адреса електроної пошти"
-        placeholderTextColor="#dbdbdb"
-        inputMode="email"
-      />
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <View style={styles.containerFotoUser}>
+          <Image
+            style={styles.addFotoUser}
+            source={require("../../img/add.png")}
+          />
+        </View>
+        <Text style={styles.text}>Реєстрація</Text>
+        <KeyboardAvoidingView
+          behavior={Platform.OS == "ios" ? "padding" : "height"}
+        >
+          <TextInput
+            style={styles.input}
+            placeholder="Логін"
+            placeholderTextColor="#dbdbdb"
+            inputMode="text"
+            onChangeText={setLoginRegistration}
+            value={loginRegistration}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Адреса електроної пошти"
+            placeholderTextColor="#dbdbdb"
+            inputMode="email"
+            onChangeText={setEmailRegistration}
+            value={emailRegistration}
+          />
 
-      <View>
-        <TextInput
-          style={styles.input}
-          placeholder="Пароль"
-          placeholderTextColor="#dbdbdb"
-          secureTextEntry={true}
-        />
-        <Text style={styles.inputText}>Показати</Text>
-      </View>
+          <View>
+            <TextInput
+              style={styles.input}
+              placeholder="Пароль"
+              placeholderTextColor="#dbdbdb"
+              secureTextEntry={true}
+              onChangeText={setPasswordRegistration}
+              value={passwordRegistration}
+            />
+            <Text style={styles.inputText}>Показати</Text>
+          </View>
+        </KeyboardAvoidingView>
 
-      <TouchableOpacity style={styles.btnTO}>
-        <Text style={styles.btnTitle}>Зареєструватися</Text>
-      </TouchableOpacity>
-      <Text style={styles.btnText}>Вже є акаунт? Увійти</Text>
-    </View>
+        <TouchableOpacity style={styles.btnTO} onPress={onRegistration}>
+          <Text style={styles.btnTitle}>Зареєструватися</Text>
+        </TouchableOpacity>
+        <Text style={styles.btnText}>Вже є акаунт? Увійти</Text>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 

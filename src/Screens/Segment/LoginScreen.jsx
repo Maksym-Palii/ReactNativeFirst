@@ -1,38 +1,69 @@
+import { useState } from "react";
 import {
   Image,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 
 const LoginScreen = () => {
+  const [emailLogin, setEmailLogin] = useState("");
+  const [passwordLogin, setPasswordLogin] = useState("");
+
+  const onLogin = () => {
+    console.log({
+      emailLogin,
+      passwordLogin,
+    });
+    resetForm();
+  };
+
+  const resetForm = () => {
+    setEmailLogin("");
+    setPasswordLogin("");
+  };
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Увійти</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Адреса електроної пошти"
-        placeholderTextColor="#dbdbdb"
-        inputMode="email"
-      />
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <Text style={styles.text}>Увійти</Text>
+        <KeyboardAvoidingView
+          behavior={Platform.OS == "ios" ? "padding" : "height"}
+        >
+          <TextInput
+            style={styles.input}
+            placeholder="Адреса електроної пошти"
+            placeholderTextColor="#dbdbdb"
+            inputMode="email"
+            onChangeText={setEmailLogin}
+            value={emailLogin}
+          />
 
-      <View>
-        <TextInput
-          style={styles.input}
-          placeholder="Пароль"
-          placeholderTextColor="#dbdbdb"
-          secureTextEntry={true}
-        />
-        <Text style={styles.inputText}>Показати</Text>
+          <View>
+            <TextInput
+              style={styles.input}
+              placeholder="Пароль"
+              placeholderTextColor="#dbdbdb"
+              secureTextEntry={true}
+              onChangeText={setPasswordLogin}
+              value={passwordLogin}
+            />
+            <Text style={styles.inputText}>Показати</Text>
+          </View>
+        </KeyboardAvoidingView>
+
+        <TouchableOpacity style={styles.btnTO} onPress={onLogin}>
+          <Text style={styles.btnTitle}>Увійти</Text>
+        </TouchableOpacity>
+        <Text style={styles.btnText}>Не має акаунту? Зареєструватися</Text>
       </View>
-
-      <TouchableOpacity style={styles.btnTO}>
-        <Text style={styles.btnTitle}>Увійти</Text>
-      </TouchableOpacity>
-      <Text style={styles.btnText}>Не має акаунту? Зареєструватися</Text>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
