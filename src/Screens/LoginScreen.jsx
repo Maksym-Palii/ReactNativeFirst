@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   Image,
+  ImageBackground,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
@@ -11,10 +12,14 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import PhotoBG from "../img/PhotoBG.png";
+import { useNavigation } from "@react-navigation/native";
 
 const LoginScreen = () => {
   const [emailLogin, setEmailLogin] = useState("");
   const [passwordLogin, setPasswordLogin] = useState("");
+
+  const navigation = useNavigation();
 
   const onLogin = () => {
     console.log({
@@ -22,6 +27,7 @@ const LoginScreen = () => {
       passwordLogin,
     });
     resetForm();
+    navigation.navigate("Home");
   };
 
   const resetForm = () => {
@@ -31,43 +37,50 @@ const LoginScreen = () => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
-        <Text style={styles.text}>Увійти</Text>
-        <KeyboardAvoidingView
-          behavior={Platform.OS == "ios" ? "padding" : "height"}
-        >
-          <TextInput
-            style={styles.input}
-            placeholder="Адреса електроної пошти"
-            placeholderTextColor="#dbdbdb"
-            inputMode="email"
-            onChangeText={setEmailLogin}
-            value={emailLogin}
-          />
-
-          <View>
+      <ImageBackground source={PhotoBG} resizeMode="cover" style={styles.bgImg}>
+        <View style={styles.container}>
+          <Text style={styles.text}>Увійти</Text>
+          <KeyboardAvoidingView
+            behavior={Platform.OS == "ios" ? "padding" : "height"}
+          >
             <TextInput
               style={styles.input}
-              placeholder="Пароль"
+              placeholder="Адреса електроної пошти"
               placeholderTextColor="#dbdbdb"
-              secureTextEntry={true}
-              onChangeText={setPasswordLogin}
-              value={passwordLogin}
+              inputMode="email"
+              onChangeText={setEmailLogin}
+              value={emailLogin}
             />
-            <Text style={styles.inputText}>Показати</Text>
-          </View>
-        </KeyboardAvoidingView>
 
-        <TouchableOpacity style={styles.btnTO} onPress={onLogin}>
-          <Text style={styles.btnTitle}>Увійти</Text>
-        </TouchableOpacity>
-        <Text style={styles.btnText}>Не має акаунту? Зареєструватися</Text>
-      </View>
+            <View>
+              <TextInput
+                style={styles.input}
+                placeholder="Пароль"
+                placeholderTextColor="#dbdbdb"
+                secureTextEntry={true}
+                onChangeText={setPasswordLogin}
+                value={passwordLogin}
+              />
+              <Text style={styles.inputText}>Показати</Text>
+            </View>
+          </KeyboardAvoidingView>
+
+          <TouchableOpacity style={styles.btnTO} onPress={onLogin}>
+            <Text style={styles.btnTitle}>Увійти</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Registration")}>
+            <Text style={styles.btnText}>Не має акаунту? Зареєструватися</Text>
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
     </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
+  bgImg: {
+    flex: 1,
+  },
   container: {
     marginTop: "auto",
     paddingLeft: 16,
