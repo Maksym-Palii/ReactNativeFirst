@@ -1,9 +1,25 @@
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { Camera } from "expo-camera";
+import * as MediaLibrary from "expo-media-library";
+import { FontAwesome } from "@expo/vector-icons";
+
+// import { TouchableOpacity } from "react-native-gesture-handler";
 
 const CreatePostsScreen = () => {
+  const takePhoto = async () => {
+    const photo = await camera.takePictureAsync();
+    setPhoto(photo.uri);
+    console.log("photo", photo);
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Page CreatePostsScreen</Text>
+      <Camera style={styles.camera}>
+        <TouchableOpacity onPress={takePhoto} style={styles.btn}>
+          <FontAwesome name="camera" size={24} color="#BDBDBD" />
+        </TouchableOpacity>
+      </Camera>
     </View>
   );
 };
@@ -11,19 +27,46 @@ const CreatePostsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 24,
+    paddingBottom: 24,
+    paddingLeft: 16,
+    paddingRight: 16,
+
+    borderStyle: "solid",
+    borderColor: "#fff",
+    backgroundColor: "#fff",
+  },
+  camera: {
+    height: 240,
+    marginBottom: 8,
     justifyContent: "center",
+    alignItems: "center",
+
+    backgroundColor: "#f6f6f6",
+    borderRadius: 8,
   },
-  text: {
-    marginTop: 32,
-    marginBottom: 32,
-    fontFamily: "Roboto-M-500",
-    fontWeight: 500,
-    fontSize: 30,
-    lineHeight: 35,
-    textAlign: "center",
-    letterSpacing: 0.01,
-    color: "#212121",
+
+  btn: {
+    width: 60,
+    height: 60,
+    justifyContent: "center",
+    alignItems: "center",
+
+    backgroundColor: "#fff",
+
+    borderRadius: 50,
   },
+  // photoView: {
+  //   position: "absolute",
+  //   top: 0,
+  //   left: 0,
+  //   width: "100%",
+  //   height: "100%",
+  // },
+  // photo: {
+  //   width: "100%",
+  //   height: "100%",
+  // },
 });
 
 export default CreatePostsScreen;
