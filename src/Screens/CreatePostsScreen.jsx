@@ -1,6 +1,6 @@
 // import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import * as MediaLibrary from "expo-media-library";
+// import * as MediaLibrary from "expo-media-library";
 // import { Camera } from "expo-camera";
 import { FontAwesome } from "@expo/vector-icons";
 
@@ -15,11 +15,12 @@ const CreatePostsScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* <Camera style={styles.camera}> */}
-      <TouchableOpacity onPress={takePhoto} style={styles.btn}>
-        <FontAwesome name="camera" size={24} color="#BDBDBD" />
-      </TouchableOpacity>
-      {/* </Camera> */}
+      <Camera style={styles.camera}>
+        <TouchableOpacity onPress={takePhoto} style={styles.btn}>
+          <FontAwesome name="camera" size={24} color="#BDBDBD" />
+        </TouchableOpacity>{" "}
+        */
+      </Camera>
     </View>
   );
 };
